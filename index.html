@@ -19,6 +19,7 @@
 
     <script>
       document.getElementById("pay").addEventListener("click", (e) => {
+        document.getElementById("PayLink")?.remove();
         const url = "https://securepay.tinkoff.ru/v2/Init";
 
         function getVal(id) {
@@ -67,6 +68,7 @@
           .then((res) => {
             const paymentURL = res.PaymentURL;
             const payLink = document.createElement("a");
+            payLink.id = "PayLink";
             payLink.innerHTML = "Перейти на страницу оплаты";
             payLink.href = paymentURL;
             document.body.appendChild(payLink);
