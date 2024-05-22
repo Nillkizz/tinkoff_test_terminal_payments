@@ -66,6 +66,12 @@
         })
           .then((res) => res.json())
           .then((res) => {
+            if (!res.Success) {
+              alert("Error:\n" + JSON.stringify(res, null, 2));
+              return;
+            }
+
+            alert("Success:\n" + JSON.stringify(res, null, 2));
             const paymentURL = res.PaymentURL;
             const payLink = document.createElement("a");
             payLink.id = "PayLink";
