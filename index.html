@@ -7,19 +7,43 @@
     <title>Document</title>
   </head>
 
-  <body>
-    <input type="text" placeholder="Номер терминала" id="term_key" />
-    <input type="text" placeholder="Пароль терминала" id="term_password" />
-    <input type="number" placeholder="Номер заказа" id="order_id" />
-    <input type="number" placeholder="Цена" id="amount" />
-    <input type="tel" placeholder="Телефон" id="phone" />
-    <input type="email" placeholder="Email" id="email" />
+  <body style="display: flex; gap: 10px">
+    <div style="width: 310px">
+      <fieldset
+        style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: auto"
+      >
+        <legend>Inputs</legend>
 
-    <button id="pay">Pay</button>
+        <input type="text" placeholder="Номер терминала" id="term_key" />
+        <input type="text" placeholder="Пароль терминала" id="term_password" />
+        <input type="number" placeholder="Номер заказа" id="order_id" />
+        <input type="number" placeholder="Цена" id="amount" />
+        <input type="tel" placeholder="Телефон" id="phone" />
+        <input type="email" placeholder="Email" id="email" />
+
+        <button id="pay">Pay</button>
+      </fieldset>
+
+      <div id="PayLink"></div>
+    </div>
+
+    <fieldset style="width: 500px; margin-left: auto; height: 600px">
+      <legend>Log</legend>
+      <textarea
+        id="LogArea"
+        readonly
+        style="resize: none; width: 100%; height: 100%"
+      ></textarea>
+    </fieldset>
 
     <script>
       document.getElementById("pay").addEventListener("click", (e) => {
-        document.getElementById("PayLink")?.remove();
+        const $payLink = document.getElementById("PayLink");
+        const $logArea = document.getElementById("LogArea");
+
+        $payLink.innerHTML = "";
+        $logArea.value = "";
+
         const url = "https://securepay.tinkoff.ru/v2/Init";
 
         function getVal(id) {
@@ -59,7 +83,7 @@
 
         fetch(url, {
           method: "POST",
-          headers: {
+          hexq279oc1oaelw3a6aders: {
             "Content-Type": "application/json;charset=utf-8",
           },
           body: JSON.stringify(req_body),
@@ -67,17 +91,22 @@
           .then((res) => res.json())
           .then((res) => {
             if (!res.Success) {
-              alert("Error:\n" + JSON.stringify(res, null, 2));
+              $logArea.value =
+                "Error:\n" +
+                JSON.stringify(res, null, 2) +
+                "\n\nRequest:\n" +
+                JSON.stringify(req_body, null, 2);
               return;
             }
 
-            alert("Success:\n" + JSON.stringify(res, null, 2));
+            $logArea.value = "Success:\n" + JSON.stringify(res, null, 2);
             const paymentURL = res.PaymentURL;
             const payLink = document.createElement("a");
             payLink.id = "PayLink";
             payLink.innerHTML = "Перейти на страницу оплаты";
             payLink.href = paymentURL;
-            document.body.appendChild(payLink);
+
+            $payLink.appendChild(payLink);
           });
       });
     </script>
