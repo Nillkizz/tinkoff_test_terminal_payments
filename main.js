@@ -16,6 +16,7 @@ document.getElementById("PayForm").addEventListener("submit", (e) => {
 
   const term_key = getVal("term_key"),
     term_password = getVal("term_password"),
+    description = getVal("description"),
     amount = getVal("amount"),
     phone = getVal("phone"),
     email = getVal("email"),
@@ -23,6 +24,7 @@ document.getElementById("PayForm").addEventListener("submit", (e) => {
 
   const req_body = {
     TerminalKey: term_key,
+    Description: description,
     Amount: amount,
     OrderId: order_id,
     Receipt: {
