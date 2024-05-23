@@ -9,19 +9,23 @@
 
   <body style="display: flex; flex-wrap: wrap; gap: 10px">
     <div style="width: 310px">
-      <fieldset
-        style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: auto"
-      >
+      <fieldset style="margin-bottom: auto">
         <legend>Inputs</legend>
 
-        <input type="text" placeholder="Номер терминала" id="term_key" />
-        <input type="text" placeholder="Пароль терминала" id="term_password" />
-        <input type="number" placeholder="Номер заказа" id="order_id" />
-        <input type="number" placeholder="Цена" id="amount" />
-        <input type="tel" placeholder="Телефон" id="phone" />
-        <input type="email" placeholder="Email" id="email" />
+        <form id="PayForm" style="display: flex; flex-wrap: wrap; gap: 10px">
+          <input type="text" placeholder="Номер терминала" id="term_key" />
+          <input
+            type="text"
+            placeholder="Пароль терминала"
+            id="term_password"
+          />
+          <input type="number" placeholder="Номер заказа" id="order_id" />
+          <input type="number" placeholder="Цена" id="amount" />
+          <input type="tel" placeholder="Телефон" id="phone" />
+          <input type="email" placeholder="Email" id="email" />
 
-        <button id="pay">Pay</button>
+          <button type="submit">Pay</button>
+        </form>
       </fieldset>
 
       <div id="PayLink"></div>

@@ -1,4 +1,5 @@
-document.getElementById("pay").addEventListener("click", (e) => {
+document.getElementById("PayForm").addEventListener("submit", (e) => {
+  e.preventDefault();
   const $payLink = document.getElementById("PayLink");
   const $logAreaRequest = document.getElementById("LogAreaRequest");
   const $logAreaResponse = document.getElementById("LogAreaResponse");
